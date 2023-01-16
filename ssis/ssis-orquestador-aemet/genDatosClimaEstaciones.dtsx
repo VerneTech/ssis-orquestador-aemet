@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{9A0D216C-6C4D-44A8-8D6F-0AAE8962464D}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{593165AB-8651-4E26-89CD-21FA3B83D79C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAANkC0qqGo3kmObfdc6iixbAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACgzmhnA+UNGnFnrXm2D3BECrPOEyRl40T1lRm975mdjgAAAAAOgAAAAAIAACAAAABmZ3kZ3fhkAhuAyXkfMmSUumKLme9tMbawGK8iOJfekyAAAABjhYrIi5d/x2bKxk9Ue1oaKzINtEXHx0+R76SiWY0tMUAAAADVmZrxdwnVwEAN9QCoUFJOYUiaFa2VfKd7hY0OkC+7D1mNxbdhkOGXmldgZpfBJKynQm3zaMC4hN3FZUowb3bP</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAANkC0qqGo3kmObfdc6iixbAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADO2v+9cUqO7y64PQV7B2LALHWf0oTzgPEt3v+4unYwzwAAAAAOgAAAAAIAACAAAACjSJG/stZtGAAxvcLbV51fi/aLnyRwWZFCnCBrX1jKbCAAAAAGAzkTSWm33CKsGpprZ5xkyklQKN0FyjHlAK/bJuIKxEAAAADz7YLAYEbagb4jrnhFqlpcxPzRRQY2wCX4cDKO0caNRhLu7dV4x5AvGKJQ0oajyWLAGkMmgZwQlZ4adTlLP20d</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -108,7 +108,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="TargetDate">
       <DTS:VariableValue
-        DTS:DataType="7">11/9/2022 3:27:25 PM</DTS:VariableValue>
+        DTS:DataType="7">1/9/2023 7:38:32 PM</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -487,31 +487,25 @@
           PanelSize="336,354"
           Size="336,397"
           Id="Package\Foreach Loop Container\Itera por estaciones"
-          TopLeft="124,143" />
+          TopLeft="122,188" />
         <NodeLayout
           Size="303,42"
           Id="Package\Foreach Loop Container\Obtiene ultima fecha con datos para la estacion"
           TopLeft="133,81" />
         <EdgeLayout
           Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
-          TopLeft="436,102">
+          TopLeft="287.25,123">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="-144,41"
+              EndConnector="0,65"
               Start="0,0"
-              End="-144,33.5">
+              End="0,57.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-140,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-140,0"
-                    Point2="-144,0"
-                    Point3="-144,4" />
-                  <mssgle:LineSegment
-                    End="-144,33.5" />
+                    End="0,57.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -547,40 +541,28 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="609,596"
-          Size="609,639"
+          PanelSize="609,640"
+          Size="609,683"
           Id="Package\Foreach Loop Container"
           TopLeft="540,247" />
         <NodeLayout
           Size="198,42"
           Id="Package\Obtienes estaciones (BD)"
-          TopLeft="640,108" />
+          TopLeft="744,73" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="739,150">
+          TopLeft="843.75,115">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="105.5,97"
+              EndConnector="0,132"
               Start="0,0"
-              End="105.5,89.5">
+              End="0,124.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,44.5"
-                    Point2="0,48.5"
-                    Point3="4,48.5" />
-                  <mssgle:LineSegment
-                    End="101.5,48.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="101.5,48.5"
-                    Point2="105.5,48.5"
-                    Point3="105.5,52.5" />
-                  <mssgle:LineSegment
-                    End="105.5,89.5" />
+                    End="0,124.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

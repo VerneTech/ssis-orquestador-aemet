@@ -1,0 +1,4 @@
+/.vs/**
+/ssis/ssis-orquestador-aemet/bin/**
+/ssis/ssis-orquestador-aemet/obj/**
+/sqldb/sql-orquestador-aemet/bin/**
