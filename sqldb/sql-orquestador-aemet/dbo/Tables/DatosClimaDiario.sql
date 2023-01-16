@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[DatosClimaDiario] (
+    [fecha]                   VARCHAR (50)     NOT NULL,
+    [indicativo]              VARCHAR (50)     NOT NULL,
+    [nombre]                  VARCHAR (50)     NULL,
+    [provincia]               VARCHAR (50)     NULL,
+    [altitud]                 NUMERIC (18, 10) NULL,
+    [temperatura_media]       NUMERIC (18, 10) NULL,
+    [precipitacion_diaria_mm] NUMERIC (18, 10) NULL,
+    [temperatura_minima]      NUMERIC (18, 10) NULL,
+    [hora_temp_min]           VARCHAR (50)     NULL,
+    [temperatura_maxima]      NUMERIC (18, 10) NULL,
+    [hora_temp_max]           VARCHAR (50)     NULL,
+    [direccion_racha_max]     NUMERIC (18, 10) NULL,
+    [viento_velocidad_media]  NUMERIC (18, 10) NULL,
+    [viento_racha_max]        NUMERIC (18, 10) NULL,
+    [hora_viento_max]         VARCHAR (50)     NULL,
+    [insolacion]              NUMERIC (18, 10) NULL,
+    [presion_hpa_max]         NUMERIC (18, 10) NULL,
+    [hora_presion_max]        VARCHAR (50)     NULL,
+    [presion_hpa_min]         NUMERIC (18, 10) NULL,
+    [hora_presion_min]        VARCHAR (50)     NULL,
+    [LoadDate]                DATETIME         CONSTRAINT [DF__DatosClim__LoadD__2A4B4B5E] DEFAULT (getdate()) NOT NULL,
+    [IdControl]               INT              CONSTRAINT [DF_DatosClimaDiario_ExecutionId] DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_DatosClimaDiario] PRIMARY KEY CLUSTERED ([fecha] ASC, [indicativo] ASC)
+);
+
