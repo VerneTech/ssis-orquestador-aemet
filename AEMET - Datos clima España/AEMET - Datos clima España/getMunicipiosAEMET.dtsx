@@ -1,0 +1,1928 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/24/2019 11:33:26 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="VPC"
+  DTS:CreatorName="SQLINT\vsanchez"
+  DTS:DTSID="{052798E8-3881-4C46-B1E7-8FBA2AC8B80E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.0900.30"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="getMunicipiosAEMET"
+  DTS:PackageType="5"
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{E82194D2-1A6A-4F67-80D0-0C6D2C5445F9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Spain_weather_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{861C0EE4-4C7F-407D-A5DC-292B508EEE32}"
+      DTS:ObjectName="Spain_weather_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=vpc;Initial Catalog=Spain_weather;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Obtener municipios AEMET"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B60E9528-1DFA-4D37-9599-DBE4E7EEE20C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Obtener municipios AEMET">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Obtener municipios AEMET\Comprueba existentes"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Comprueba existentes"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[Municipios]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[Municipios]) [refTable]
+where [refTable].[id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="id" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="id_old" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="capital" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="latitud" dataType="DT_NUMERIC" length="0" precision="12" scale="8" codePage="0"/&gt;&lt;referenceColumn name="longitud" dataType="DT_NUMERIC" length="0" precision="12" scale="8" codePage="0"/&gt;&lt;referenceColumn name="altitud" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="habitantes" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="zona_comarcal" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LoadDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Obtener municipios AEMET\Comprueba existentes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Spain_weather_DB]"
+                  connectionManagerRefId="Package.ConnectionManagers[Spain_weather_DB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Obtener municipios AEMET\Comprueba existentes.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Comprueba existentes.Inputs[Lookup Input].Columns[id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="id"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Obtener municipios AEMET\Comprueba existentes.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Match Output].Columns[existing.id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Match Output].Columns[existing.id]"
+                      name="existing.id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Obtener municipios AEMET\Comprueba existentes.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Obtener municipios AEMET\Comprueba existentes.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Obtener municipios AEMET\getMunicipios"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;11"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="getMunicipios"
+              version="11">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="30">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public Output0Buffer Output0Buffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != Output0Buffer)
+        {
+            Output0Buffer.SetEndOfRowset();
+            Output0Buffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"Output 0"))
+            {
+                Output0Buffer = new Output0Buffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String APIKEY
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["API_KEY"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String WebserviceRootURL
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["WebserviceRootURL"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using System.IO;
+using System.Net;
+using System.Web.Script.Serialization;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    public override void CreateNewOutputRows()
+    {
+        bool pBool = true;
+        string wUrl = Variables.WebserviceRootURL + "/maestro/municipios";
+        this.ComponentMetaData.FireInformation(0, "GetMunicipios", string.Format("webservice endpoint: {0}", wUrl), string.Empty, 0, ref pBool);
+
+        try
+        {
+            //Call getWebServiceResult to return our WorkGroupMetric array
+            Municipio[] municipios = GetWebServiceResult(wUrl);
+
+            //For each group of metrics output records
+            foreach (var municipio in municipios)
+            {
+                Output0Buffer.AddRow();
+                Output0Buffer.id = municipio.id;
+                Output0Buffer.idold = municipio.id_old;
+                Output0Buffer.nombre= municipio.nombre;
+                Output0Buffer.capital= municipio.capital;
+                Output0Buffer.latitud= municipio.latitud_dec;
+                Output0Buffer.longitud = municipio.longitud_dec;
+                Output0Buffer.habitantes= municipio.habitantes;
+                Output0Buffer.altitud = municipio.altitud;
+                Output0Buffer.zonacomarcal = municipio.zona_comarcal;
+            }
+
+        }
+        catch (Exception e)
+        {
+            FailComponent(e.ToString());
+        }
+
+    }
+
+    /// <summary>
+    /// Metodo para devolver el array de Municipios (AEMET https://opendata.aemet.es/opendata/api/maestro/municipios)
+    /// </summary>
+    /// <param name="wUrl">The web service URL to call</param>
+    /// <returns>Array de Municipios basado en el JSON de-serialized</returns>
+    private Municipio[] GetWebServiceResult(string wUrl)
+    {
+
+        HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create(wUrl);
+        httpWReq.Headers.Add("api_key", Variables.APIKEY.ToString());
+        httpWReq.Accept = "text/plain";
+        httpWReq.ContentType = "application/json";
+        HttpWebResponse httpWResp = (HttpWebResponse)httpWReq.GetResponse();
+        Municipio[] jsonResponse = null;
+        
+        try
+        {
+            //Test the connection
+            if (httpWResp.StatusCode == HttpStatusCode.OK)
+            {
+
+                Stream responseStream = httpWResp.GetResponseStream();
+                string jsonString = null;
+
+
+                //Set jsonString using a stream reader
+                using (StreamReader reader = new StreamReader(responseStream, System.Text.Encoding.GetEncoding(httpWResp.CharacterSet)))
+                {
+
+                    jsonString = reader.ReadToEnd().Replace("\\", "").Replace("\"\"", "\"");
+                    reader.Close();
+                }
+
+                //Deserialize our JSON
+                JavaScriptSerializer sr = new JavaScriptSerializer();
+                sr.MaxJsonLength = int.MaxValue;
+                //JSON string comes in with a leading and trailing " that need to be removed for parsing to work correctly
+                //The JSON here is serialized weird, normally you would not need this trim
+                jsonResponse = sr.Deserialize<Municipio[]>(jsonString.Trim('"'));
+
+            }
+            //Output connection error message
+            else
+            {
+                FailComponent(httpWResp.StatusCode.ToString());
+
+            }
+        }
+        //Output JSON parsing error
+        catch (Exception e)
+        {
+            FailComponent(e.ToString());
+        }
+        return jsonResponse;
+
+    }
+
+    /// <summary>
+    /// Outputs error message
+    /// </summary>
+    /// <param name="errorMsg">Full error text</param>
+    private void FailComponent(string errorMsg)
+    {
+        bool fail = false;
+        IDTSComponentMetaData100 compMetadata = this.ComponentMetaData;
+        compMetadata.FireError(1, "Error Getting Data From Webservice!", errorMsg, "", 0, out fail);
+
+    }
+
+
+
+
+
+#region JSON Class
+
+class Municipio
+    {
+        public string id { get; set; }
+
+        public int id_old { get; set; }
+        public string nombre { get; set; }
+        public string capital { get; set; }
+        public decimal latitud_dec{ get; set; }
+        public decimal longitud_dec { get; set; }
+
+        public int altitud { get; set; }
+
+        public int habitantes { get; set; }
+
+        public int zona_comarcal { get; set; }
+    }
+    #endregion
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Output0Buffer: ScriptBuffer
+
+{
+    public Output0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public Int32 idold
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool idold_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal latitud
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool latitud_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Decimal longitud
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool longitud_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 altitud
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool altitud_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 habitantes
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool habitantes_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String capital
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool capital_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String nombre
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool nombre_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String id
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool id_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 zonacomarcal
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool zonacomarcal_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_b5e140eba3024d42ba16278ab517cfbf.Properties.Settings.get_Default():SC_b5e140eba3024d42ba16278ab517cfbf.Properties.Sett" +
+    "ings")]
+
+namespace SC_b5e140eba3024d42ba16278ab517cfbf.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_b5e140eba3024d42ba16278ab517cfbf.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6C6BAA8B-F89E-424C-8659-179C8EFF2302}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_b5e140eba3024d42ba16278ab517cfbf</RootNamespace>
+    <AssemblyName>SC_b5e140eba3024d42ba16278ab517cfbf</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>SC_b5e140eba3024d42ba16278ab517cfbf</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>SC_b5e140eba3024d42ba16278ab517cfbf</msb:DisplayName>
+    <msb:ProjectId>{FC353F75-BB9F-40BC-B8F5-9C88DA59C807}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="SC_b5e140eba3024d42ba16278ab517cfbf.csproj" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_b5e140eba3024d42ba16278ab517cfbf")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_b5e140eba3024d42ba16278ab517cfbf")]
+[assembly: AssemblyCopyright("Copyright @  2019")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_b5e140eba3024d42ba16278ab517cfbf.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_b5e140eba3024d42ba16278ab517cfbf.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_b5e140eba3024d42ba16278ab517cfbf.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_b5e140eba3024d42ba16278ab517cfbf.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_b5e140eba3024d42ba16278ab517cfbf.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_b5e140eba3024d42ba16278ab517cfbf.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[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
+AAAAAIYIuACCASQAHiYAAAAAhgjJAE0BJAAnJgAAAACGCG4CfgElAC8mAAAAAIYIegIBACUAOCYA
+AAAAhghhCn4BJgBAJgAAAACGCHAKAQAmAEkmAAAAAIYI7gV+AScAUSYAAAAAhggABgEAJwBjJQAA
+AACGGG8JBgAoAAAAAQA1BwAAAQDTBQAAAQDkCAAAAgB/CgAAAwBTCAAAAQBuBQAAAQBuBQAAAQBu
+BQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAA
+AQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQDpCgAAAgB8CQAAAwDbCgAABABT
+CAAAAQCXCwAAAQCXCwAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAAAQBuBQAA
+AQBuBQAAAQBuBQAAAQBuBQkAbwkBABEAbwkGABkAbwkKACkAbwkQADEAbwkQADkAbwkQAEEAbwkQ
+AEkAbwkQAFEAbwkQAFkAbwkQAGEAbwkQAGkAbwkGAJkAbwkGAMkAbwkGAOkAbwkVAMEAVwUGAMEA
+YgUGAPkABQsoAMEAmQAuAPkADAs0APkAaQw6AAEBgQc9AJEAygVIAAkBnQNbAAkBzwpiACEB+gBo
+ABEBoQsQAAkBDQMQAAkBgwNuAHkAngJ0ACkBOgd5AHkAJQtIADkBpAV/AIEAbwmGAEEBSwJIAPkA
+hgKQAEEBjwMGAEkBlQMGAFEBbwkGAFEB3AUBAPkAZQeWAFEBdAWcAAEBZQk9AKkAbwmtAKkAVQe3
+AKkALQcBAGkBbwkQAKkAVQwGAKkANgsGAKkAOQu9AMEAbwkGAMEAYgDFAMEAkwrMAJEAbwkGAMEA
+SwrSAHEBTAfYAMEAQAzfAHkBEQzlAJEB2gLsAJEBXAz1ANEAbwn7APEAbwkGAC4ACwCnAS4AEwCw
+AS4AGwDPAS4AIwDYAS4AKwABAi4AMwABAi4AOwABAi4AQwDYAS4ASwAHAi4AUwABAi4AWwAeAkMA
+YwBoAuMAcwBoAgEBawBoAiEBawBoAkEBawBoAmEBawBoAoEBawBoAqEBawBoAsEBawBoAuEBawBo
+AgECawBoAiECawBoAqkCewDPAckCewDPAaAFawBoAsAFawBoAuAFawBoAgAGawBoAiAGawBoAkAG
+awBoAmAGawBoAoAGawBoAqAGawBoAsAGawBoAuAGawBoAgAHawBoAiAHawBoAkAHawBoAmAHawBo
+AoAHawBoAqAHawBoAsAHawBoAhsATACpAMEAAwABAAYAEwAHABUACAAXAAkAGAAAAEUChwEAAJMG
+iwEAAGYCjwEAALgGiwEAAFkCjwEAAKQGiwEAAH4ChwEAAMsGiwEAAHQKhwEAABsHiwEAADsGlAEA
+AAgHiwEAACwDlAEAAN4GiwEAADwBlAEAAIUGiwEAABYGhwEAAPAGiwEAAJIAlAEAAHIAlAEAAO8I
+mAEAAFMDnQEAAEkLogEAADwBlAEAADoChwEAACwDlAEAADsGlAEAAO4AjwEAAM0AjwEAAH4ChwEA
+AHQKhwEAAAQGhwEBAAgAAwABAAkABQABAAoABwABAAsACQABAAwACwABAA0ADQABAA4ADwABAA8A
+EQABABAAEwABABEAFQABABIAFwABABMAGQABABQAGwABABUAHQABABYAHwABABcAIQABABgAIwAB
+ABkAJQACACQAJwACACUAKQACACcAKwACACgALQABACkALQACACoALwACAC0AMQABAC4AMQACAC8A
+MwABADAAMwACADEANQABADIANQACADMANwABADQANwACADUAOQABADYAOQACADcAOwABADgAOwAC
+ADkAPQABADoAPQACADsAPwABADwAPwACAD0AQQABAD4AQQAEgAAAAQAAAAAAAAAAAAAAAACABQAA
+BAAAAAAAAAAAAAAAAwGvAAAAAAAOAAAAAAAAAAAAAAAMAawLAAAAAAQAAAAAAAAAAAAAAAMBXgcA
+AAAADgAAAAAAAAAAAAAADAHYCwAAAAAOAAAAAAAAAAAAAAAMAYAIAAAAAAQAAAAAAAAAAAAAABUB
+rQoAAAAADgAAAAAAAAAAAAAADAFdCAAAAAAAAAAAAQAAAMoJAAAJAAIAVQCjAAAAAElEVFNDb21w
+b25lbnRNZXRhRGF0YTEwMABJRFRTVmFyaWFibGUxMDAASURUU1ZhcmlhYmxlczEwMABJRFRTRXZh
+bHVhdG9yQ29udGV4dDEwMABJbnQzMgA8TW9kdWxlPgBHZXRPdXRwdXRJRABnZXRfV2Vic2Vydmlj
+ZVJvb3RVUkwAU3lzdGVtLklPAGdldF9BUElLRVkAZ2V0X0NvbXBvbmVudE1ldGFEYXRhAG1zY29y
+bGliAGdldF9sb25naXR1ZF9kZWMAc2V0X2xvbmdpdHVkX2RlYwBnZXRfbGF0aXR1ZF9kZWMAc2V0
+X2xhdGl0dWRfZGVjAEFkZABNYXJrT3V0cHV0c0ZpbmlzaGVkAFN5c3RlbS5Db2xsZWN0aW9ucy5T
+cGVjaWFsaXplZABnZXRfaWQAc2V0X2lkADxsb25naXR1ZF9kZWM+a19fQmFja2luZ0ZpZWxkADxs
+YXRpdHVkX2RlYz5rX19CYWNraW5nRmllbGQAPGlkPmtfX0JhY2tpbmdGaWVsZAA8aWRfb2xkPmtf
+X0JhY2tpbmdGaWVsZAA8YWx0aXR1ZD5rX19CYWNraW5nRmllbGQAPG5vbWJyZT5rX19CYWNraW5n
+RmllbGQAPHpvbmFfY29tYXJjYWw+a19fQmFja2luZ0ZpZWxkADxjYXBpdGFsPmtfX0JhY2tpbmdG
+aWVsZAA8aGFiaXRhbnRlcz5rX19CYWNraW5nRmllbGQAZ2V0X2lkX29sZABzZXRfaWRfb2xkAHNl
+dF9pZG9sZABSZWFkVG9FbmQAc2V0X2xvbmdpdHVkAHNldF9sYXRpdHVkAGdldF9hbHRpdHVkAHNl
+dF9hbHRpdHVkAFJlcGxhY2UAZGVmYXVsdEluc3RhbmNlAGdldF9TdGF0dXNDb2RlAEh0dHBTdGF0
+dXNDb2RlAElEaXNwb3NhYmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAE1p
+Y3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lAHNldF9Db250ZW50VHlwZQBnZXRfbm9tYnJl
+AHNldF9ub21icmUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJlAEFwcGxp
+Y2F0aW9uU2V0dGluZ3NCYXNlAEh0dHBXZWJSZXNwb25zZQBHZXRSZXNwb25zZQBDbG9zZQBEaXNw
+b3NlAENyZWF0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0
+ZQBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9y
+QnJvd3NhYmxlQXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1h
+cmtBdHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlv
+bkF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhh
+dGlvbnNBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0
+QXR0cmlidXRlAFNTSVNTY3JpcHRDb21wb25lbnRFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5
+Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBQcmVFeGVjdXRl
+AFBvc3RFeGVjdXRlAHZhbHVlAERlc2VyaWFsaXplAFNDX2I1ZTE0MGViYTMwMjRkNDJiYTE2Mjc4
+YWI1MTdjZmJmAEdldEVuY29kaW5nAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9TdHJpbmcA
+ZXJyb3JNc2cAc2V0X01heEpzb25MZW5ndGgAZ2V0X3pvbmFfY29tYXJjYWwAc2V0X3pvbmFfY29t
+YXJjYWwAc2V0X3pvbmFjb21hcmNhbABEZWNpbWFsAGdldF9jYXBpdGFsAHNldF9jYXBpdGFsAFN5
+c3RlbS5Db21wb25lbnRNb2RlbABTQ19iNWUxNDBlYmEzMDI0ZDQyYmExNjI3OGFiNTE3Y2ZiZi5k
+bGwAc2V0X2lkX0lzTnVsbABzZXRfaWRvbGRfSXNOdWxsAHNldF9sb25naXR1ZF9Jc051bGwAc2V0
+X2xhdGl0dWRfSXNOdWxsAHNldF9hbHRpdHVkX0lzTnVsbABzZXRfbm9tYnJlX0lzTnVsbABzZXRf
+em9uYWNvbWFyY2FsX0lzTnVsbABzZXRfY2FwaXRhbF9Jc051bGwAc2V0X2hhYml0YW50ZXNfSXNO
+dWxsAFNldE51bGwAd1VybABHZXRSZXNwb25zZVN0cmVhbQBnZXRfSXRlbQBzZXRfSXRlbQBTeXN0
+ZW0AVHJpbQByZXNvdXJjZU1hbgBTY3JpcHRNYWluAEZpcmVJbmZvcm1hdGlvbgBTeXN0ZW0uQ29u
+ZmlndXJhdGlvbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uV2ViLlNjcmlwdC5TZXJpYWxp
+emF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAE5hbWVWYWx1ZUNvbGxlY3Rpb24AV2ViSGVhZGVyQ29s
+bGVjdGlvbgBJbnZhbGlkT3BlcmF0aW9uRXhjZXB0aW9uAEN1bHR1cmVJbmZvAE11bmljaXBpbwBP
+dXRwdXROYW1lTWFwAE91dHB1dE1hcABNaWNyb3NvZnQuU3FsU2VydmVyLkRUU1J1bnRpbWVXcmFw
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUGlwZWxpbmVXcmFwAENoYXIAU3RyZWFtUmVhZGVyAFRl
+eHRSZWFkZXIAT3V0cHV0MEJ1ZmZlcgBQaXBlbGluZUJ1ZmZlcgBTY3JpcHRCdWZmZXIAZ2V0X1Jl
+c291cmNlTWFuYWdlcgBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lLldyYXBwZXIATWlj
+cm9zb2Z0LlNxbFNlcnZlci5EdHMuUGlwZWxpbmUuV3JhcHBlcgBKYXZhU2NyaXB0U2VyaWFsaXpl
+cgBGaXJlRXJyb3IALmN0b3IALmNjdG9yAE91dHB1dElEcwBTeXN0ZW0uRGlhZ25vc3RpY3MAU3lz
+dGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNDX2I1ZTE0MGVi
+YTMwMjRkNDJiYTE2Mjc4YWI1MTdjZmJmLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291cmNlcwBE
+ZWJ1Z2dpbmdNb2RlcwBTQ19iNWUxNDBlYmEzMDI0ZDQyYmExNjI3OGFiNTE3Y2ZiZi5Qcm9wZXJ0
+aWVzAGdldF9SZWFkT25seVZhcmlhYmxlcwBnZXRfaGFiaXRhbnRlcwBzZXRfaGFiaXRhbnRlcwBC
+dWZmZXJDb2x1bW5JbmRleGVzAEdldENvbHVtbkluZGV4ZXMAU2V0dGluZ3MAU3lzdGVtLldlYi5F
+eHRlbnNpb25zAENvbm5lY3Rpb25zAGdldF9IZWFkZXJzAEJ1ZmZlcnMARmluaXNoT3V0cHV0cwBD
+cmVhdGVOZXdPdXRwdXRSb3dzAENvbmNhdABGb3JtYXQAT2JqZWN0AFN5c3RlbS5OZXQAZ2V0X0No
+YXJhY3RlclNldABTZXRFbmRPZlJvd3NldABnZXRfRGVmYXVsdABHZXRXZWJTZXJ2aWNlUmVzdWx0
+AEZhaWxDb21wb25lbnQAVXNlckNvbXBvbmVudABQYXJlbnRDb21wb25lbnQAU2NyaXB0Q29tcG9u
+ZW50AHNldF9BY2NlcHQATWljcm9zb2Z0LlNxbFNlcnZlci5UeFNjcmlwdABIdHRwV2ViUmVxdWVz
+dABNaWNyb3NvZnQuU3FsU2VydmVyLlBpcGVsaW5lSG9zdABQcmltZU91dHB1dABTeXN0ZW0uVGV4
+dABHZXRWYWx1ZVdpdGhDb250ZXh0AFNjcmlwdENvbXBvbmVudEV2YWxDb250ZXh0AGdldF9FdmFs
+dWF0b3JDb250ZXh0AEFkZFJvdwBnZXRfQXNzZW1ibHkARW1wdHkAAAAnLwBtAGEAZQBzAHQAcgBv
+AC8AbQB1AG4AaQBjAGkAcABpAG8AcwAAG0cAZQB0AE0AdQBuAGkAYwBpAHAAaQBvAHMAADF3AGUA
+YgBzAGUAcgB2AGkAYwBlACAAZQBuAGQAcABvAGkAbgB0ADoAIAB7ADAAfQAAD2EAcABpAF8AawBl
+AHkAABV0AGUAeAB0AC8AcABsAGEAaQBuAAAhYQBwAHAAbABpAGMAYQB0AGkAbwBuAC8AagBzAG8A
+bgAAA1wAAAEABSIAIgAAAyIAAEdFAHIAcgBvAHIAIABHAGUAdAB0AGkAbgBnACAARABhAHQAYQAg
+AEYAcgBvAG0AIABXAGUAYgBzAGUAcgB2AGkAYwBlACEAAICbSQBzAE4AdQBsAGwAIABwAHIAbwBw
+AGUAcgB0AHkAIABjAGEAbgBuAG8AdAAgAGIAZQAgAHMAZQB0ACAAdABvACAARgBhAGwAcwBlAC4A
+IABBAHMAcwBpAGcAbgAgAGEAIAB2AGEAbAB1AGUAIAB0AG8AIAB0AGgAZQAgAGMAbwBsAHUAbQBu
+ACAAaQBuAHMAdABlAGEAZAAuAAARTwB1AHQAcAB1AHQAIAAwAAAPQQBQAEkAXwBLAEUAWQAAI1cA
+ZQBiAHMAZQByAHYAaQBjAGUAUgBvAG8AdABVAFIATAAAcVMAQwBfAGIANQBlADEANAAwAGUAYgBh
+ADMAMAAyADQAZAA0ADIAYgBhADEANgAyADcAOABhAGIANQAxADcAYwBmAGIAZgAuAFAAcgBvAHAA
+ZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAM/G++pfDgUW2/ZX1YZzAnQAEIAEBCAMg
+AAEFIAEBEREEIAEBDgUgAQERcQwHBgIOHRIkCBIkEjkFAAIODg4FIAASgIEFAAIODhwCBg4KIAYB
+CA4ODggQAgMgAA4OBwYSPR0SJA4SQRFFEjkGAAESgIUOBSAAEoCNBSACAQ4OBSAAEoCVBCAAEUUF
+IAASgJkGAAESgJ0OCSACARKAmRKAnQUgAg4ODgUgAQ4dAwYwAQEeAA4FCgEdEiQDBwECCSADARJZ
+HQgSXQUgAgEIHAMgAAIDBwEIBgACCBJdDgUgAR0ICAUgABKAuQYgARKAvRwFAAASgMEGIAEcEoDF
+CAABEoDJEYDNBSAAEoDRByACAQ4SgNEIt3pcVhk04IkIiYRdzYCAzJEIMb84Vq02TjUDBhIUAwYS
+GAMGEgwDBhJhAwYSaQMGEm0DBhIgAgYIAwYRUQYgAR0SJA4EIAEBAgUgAQERUQsgBAEIHQgdElkS
+XQUgAQESYQQAABJpBAAAEm0FAAEBEm0EAAASIAMAAAEDIAAIBCAAEVEDKAAIAygAAgQoABFRAygA
+DgQIABJpBAgAEm0ECAASIAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEI
+AQACAAAAAAAoAQAjU0NfYjVlMTQwZWJhMzAyNGQ0MmJhMTYyNzhhYjUxN2NmYmYAAAUBAAAAABYB
+ABFDb3B5cmlnaHQgQCAgMjAxOQAASQEAGi5ORVRGcmFtZXdvcmssVmVyc2lvbj12NC41AQBUDhRG
+cmFtZXdvcmtEaXNwbGF5TmFtZRIuTkVUIEZyYW1ld29yayA0LjUEAQAAAAAAALQAAADOyu++AQAA
+AJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249
+NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5
+I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQA
+AADoRAAAAAAAAAAAAAACRQAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9EQAAAAAAAAAAAAAAABf
+Q29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAA
+GAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhgAADs
+AwAAAAAAAAAAAADsAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv/gAA
+AQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYAYQBy
+AEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAAALAE
+TAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAAMAAwADQAYgAw
+AAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkATgBhAG0A
+ZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAEMAXwBi
+ADUAZQAxADQAMABlAGIAYQAzADAAMgA0AGQANAAyAGIAYQAxADYAMgA3ADgAYQBiADUAMQA3AGMA
+ZgBiAGYAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAuADAAAABw
+ACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfAGIANQBlADEANAAwAGUAYgBhADMA
+MAAyADQAZAA0ADIAYgBhADEANgAyADcAOABhAGIANQAxADcAYwBmAGIAZgAuAGQAbABsAAAASAAS
+AAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAA
+IAAyADAAMQA5AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4
+ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBDAF8AYgA1AGUAMQA0ADAA
+ZQBiAGEAMwAwADIANABkADQAMgBiAGEAMQA2ADIANwA4AGEAYgA1ADEANwBjAGYAYgBmAC4AZABs
+AGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAQwBfAGIANQBlADEANAAwAGUA
+YgBhADMAMAAyADQAZAA0ADIAYgBhADEANgAyADcAOABhAGIANQAxADcAYwBmAGIAZgAAADQACAAB
+AFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgAAQBBAHMA
+cwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMAAAAFDUAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_b5e140eba3024d42ba16278ab517cfbf</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">$Project::WebserviceRootURL,$Project::API_KEY</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">F1</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0]"
+                  hasSideEffects="true"
+                  name="Output 0">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id_old]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id_old]"
+                      name="id_old" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[latitud]"
+                      dataType="numeric"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[latitud]"
+                      name="latitud"
+                      precision="12"
+                      scale="8" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[longitud]"
+                      dataType="numeric"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[longitud]"
+                      name="longitud"
+                      precision="12"
+                      scale="8" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[altitud]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[altitud]"
+                      name="altitud" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[habitantes]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[habitantes]"
+                      name="habitantes" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[capital]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[capital]"
+                      name="capital" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[zona_comarcal]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[zona_comarcal]"
+                      name="zona_comarcal" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Obtener municipios AEMET\Inserta municipios"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Inserta municipios"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Municipios]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Obtener municipios AEMET\Inserta municipios.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Spain_weather_DB]"
+                  connectionManagerRefId="Package.ConnectionManagers[Spain_weather_DB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[id_old]"
+                      cachedDataType="i4"
+                      cachedName="id_old"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[id_old]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id_old]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[latitud]"
+                      cachedDataType="numeric"
+                      cachedName="latitud"
+                      cachedPrecision="12"
+                      cachedScale="8"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[latitud]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[latitud]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[longitud]"
+                      cachedDataType="numeric"
+                      cachedName="longitud"
+                      cachedPrecision="12"
+                      cachedScale="8"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[longitud]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[longitud]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[altitud]"
+                      cachedDataType="i4"
+                      cachedName="altitud"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[altitud]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[altitud]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[habitantes]"
+                      cachedDataType="i4"
+                      cachedName="habitantes"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[habitantes]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[habitantes]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[capital]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="capital"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[capital]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[capital]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[nombre]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].Columns[zona_comarcal]"
+                      cachedDataType="i4"
+                      cachedName="zona_comarcal"
+                      externalMetadataColumnId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[zona_comarcal]"
+                      lineageId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0].Columns[zona_comarcal]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[id_old]"
+                      dataType="i4"
+                      name="id_old" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[capital]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="capital" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[latitud]"
+                      dataType="numeric"
+                      name="latitud"
+                      precision="12"
+                      scale="8" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[longitud]"
+                      dataType="numeric"
+                      name="longitud"
+                      precision="12"
+                      scale="8" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[altitud]"
+                      dataType="i4"
+                      name="altitud" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[habitantes]"
+                      dataType="i4"
+                      name="habitantes" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[zona_comarcal]"
+                      dataType="i4"
+                      name="zona_comarcal" />
+                    <externalMetadataColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Obtener municipios AEMET\Inserta municipios.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\Inserta municipios.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Obtener municipios AEMET\Inserta municipios.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Obtener municipios AEMET\Inserta municipios.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Obtener municipios AEMET.Paths[Lookup No Match Output]"
+              endId="Package\Obtener municipios AEMET\Inserta municipios.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Obtener municipios AEMET\Comprueba existentes.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Obtener municipios AEMET.Paths[Output 0]"
+              endId="Package\Obtener municipios AEMET\Comprueba existentes.Inputs[Lookup Input]"
+              name="Output 0"
+              startId="Package\Obtener municipios AEMET\getMunicipios.Outputs[Output 0]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Obtener municipios AEMET"
+          TopLeft="500.5,156.5" />
+        <AnnotationLayout
+          Text="https://opendata.aemet.es/opendata/api/maestro/municipios"
+          ParentId="Package"
+          Size="326,60"
+          Id="8302a18a-757d-40f4-b00f-4505e6481115"
+          TopLeft="491,88">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Obtener municipios AEMET">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Obtener municipios AEMET\getMunicipios"
+          TopLeft="495,135" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Obtener municipios AEMET\Inserta municipios"
+          TopLeft="614,361" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Obtener municipios AEMET\Comprueba existentes"
+          TopLeft="563,240" />
+        <EdgeLayout
+          Id="Package\Obtener municipios AEMET.Paths[Output 0]"
+          TopLeft="566.5,177">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="88,63"
+              Start="0,0"
+              End="88,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.5"
+                    Point2="0,31.5"
+                    Point3="4,31.5" />
+                  <mssgle:LineSegment
+                    End="84,31.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84,31.5"
+                    Point2="88,31.5"
+                    Point3="88,35.5" />
+                  <mssgle:LineSegment
+                    End="88,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Obtener municipios AEMET.Paths[Lookup No Match Output]"
+          TopLeft="654.5,282">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="42,79"
+              Start="0,0"
+              End="42,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.5"
+                    Point2="0,39.5"
+                    Point3="4,39.5" />
+                  <mssgle:LineSegment
+                    End="38,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38,39.5"
+                    Point2="42,39.5"
+                    Point3="42,43.5" />
+                  <mssgle:LineSegment
+                    End="42,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.80638671875,44.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Obtener municipios AEMET\Inserta municipios">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Obtener municipios AEMET\Comprueba existentes">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Municipios]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

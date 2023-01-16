@@ -1,0 +1,596 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/25/2019 5:25:35 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="VPC"
+  DTS:CreatorName="SQLINT\vsanchez"
+  DTS:DTSID="{240CFB33-A50E-469E-97AB-B8305873568D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{9A0D216C-6C4D-44A8-8D6F-0AAE8962464D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Spain_weather_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C24FCE3D-671F-4BD6-929A-A16F90612281}"
+      DTS:ObjectName="Spain_weather_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;User ID=sa;Initial Catalog=Spain_weather;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{C24FCE3D-671F-4BD6-929A-A16F90612281}Spain_weather_DB;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAANkC0qqGo3kmObfdc6iixbAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACHFC62BdZPaD4zU6r/89JwBsHHu5ihSIplDo7EV2q7lAAAAAAOgAAAAAIAACAAAAAmZCRA98NfIu3GrylN/YC3Dhohfo9bUi8X0bnDP6dmUyAAAADr2NwbjrN06ZLuF2aq2tfsN1lcKfSrakVtVK9Jq6P2ikAAAAASGtHbV53W/jcZPTewnSqxonR7NSTO38lu5H2JhLYj6gLvJaXsf9VrWMkFROLoYxYMoTh6PMBOHIQKe08QR0M5</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E93FDECC-8B53-4F50-BE27-CF559CBEBF7E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentIdEstacion">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ADC49ECF-3170-47AA-AF58-59ABF8DC3C1F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentUltimaFecha">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3D8F28BE-7995-47D8-A809-E7FADEB72B12}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dsIdEstaciones">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{39477C23-B154-4ED6-974F-878EA84EC35B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="HaltedBy_NoMoreRecords">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D76F1305-3408-47EB-ADEF-F9DCFF89D0D8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="HaltedBy_RequestExcess">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9308C5DF-C276-45A4-8F18-C98C63DBC6E7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Id_execution">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B0517926-4CE2-4B10-BF11-1AEE513A38EB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="dateadd(&quot;Day&quot;,-7,GETUTCDATE())"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TargetDate">
+      <DTS:VariableValue
+        DTS:DataType="7">11/9/2022 3:27:25 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{B33C6C9E-F716-46E9-9946-422081E5C190}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{B74AB36F-F563-4C13-A708-ADD6F101AB4B}"
+        DTS:ObjectName="{B74AB36F-F563-4C13-A708-ADD6F101AB4B}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::dsIdEstaciones" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\CheckPoint - Request Excess"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{BB5E300F-7F27-4F70-A49A-1DC5301BCEFA}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CheckPoint - Request Excess"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::HaltedBy_NoMoreRecords]=0" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Itera por estaciones"
+          DTS:CreationName="STOCK:FORLOOP"
+          DTS:Description="For Loop Container"
+          DTS:DTSID="{5A7B9B91-B726-48CD-9943-27BAC7D2CBF9}"
+          DTS:EvalExpression="@currentUltimaFecha&lt;@TargetDate &amp;&amp; @HaltedBy_NoMoreRecords==0 &amp;&amp; @HaltedBy_RequestExcess==0"
+          DTS:ExecutableType="STOCK:FORLOOP"
+          DTS:LocaleID="-1"
+          DTS:MaxConcurrent="1"
+          DTS:ObjectName="Itera por estaciones">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones\Carga último año a partir de la fecha"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{D305CD77-B087-4B54-8FB4-4DB94531B725}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Carga último año a partir de la fecha"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>getDatosClima.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>idema_estacion</ParameterName>
+                    <BindedVariableOrParameterName>User::currentIdEstacion</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                  <ParameterAssignment>
+                    <ParameterName>fecha_inicio</ParameterName>
+                    <BindedVariableOrParameterName>User::currentUltimaFecha</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                  <ParameterAssignment>
+                    <ParameterName>id_execution</ParameterName>
+                    <BindedVariableOrParameterName>User::Id_execution</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones\Genera un Id para la ejecución"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{24B40C0F-1E39-401F-8EFF-3C8053538E5C}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Genera un Id para la ejecución"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C24FCE3D-671F-4BD6-929A-A16F90612281}"
+                  SQLTask:SqlStatementSource="insert into control.idgenerator (created_on) select getdate();&#xA;select @@identity;"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::Id_execution" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones\Obtiene info control"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{3A991193-6D2E-48C3-85AE-54FD734D46AA}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Obtiene info control"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C24FCE3D-671F-4BD6-929A-A16F90612281}"
+                  SQLTask:SqlStatementSource="select case when coalesce([remaining-request-count],1)&gt;0 then 0 else 1 end HaltedBy_RequestExcess&#xA;&#x9;, case when coalesce([aemet-num],0) &gt; 0 then 0&#xA;&#x9;&#x9;   when [access-status]=404 then 1&#xA;&#x9;&#x9;   else 1 end HaltedBy_NoMoreRecords&#xA;&#x9;from [control].datosclimadiario &#xA; where id=?"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::HaltedBy_RequestExcess" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="1"
+                    SQLTask:DtsVariableName="User::HaltedBy_NoMoreRecords" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::Id_execution"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones\Obtiene ultima fecha con datos para la estacion"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{4D7803ED-49B7-4021-94AA-6DBA54220665}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Obtiene ultima fecha con datos para la estacion"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C24FCE3D-671F-4BD6-929A-A16F90612281}"
+                  SQLTask:SqlStatementSource="select coalesce(dateadd(day,1,max(fecha)),cast('20100101' as datetime)) fecha_ini from datosclimadiario  where indicativo=?"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::currentUltimaFecha" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::currentIdEstacion"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{8A4E0B41-8915-44A7-9B60-313E901A1BD8}"
+              DTS:From="Package\Foreach Loop Container\Itera por estaciones\Carga último año a partir de la fecha"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Foreach Loop Container\Itera por estaciones\Obtiene ultima fecha con datos para la estacion" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{02044482-FC81-4D8C-973B-F7EB6953B1BF}"
+              DTS:From="Package\Foreach Loop Container\Itera por estaciones\Genera un Id para la ejecución"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Foreach Loop Container\Itera por estaciones\Carga último año a partir de la fecha" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Foreach Loop Container\Itera por estaciones.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{662E9339-C22E-4492-9C68-52B524A2283B}"
+              DTS:From="Package\Foreach Loop Container\Itera por estaciones\Obtiene ultima fecha con datos para la estacion"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Foreach Loop Container\Itera por estaciones\Obtiene info control" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Obtiene ultima fecha con datos para la estacion"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1476A1E0-B38D-4333-A7B3-5777AC831865}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Obtiene ultima fecha con datos para la estacion"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C24FCE3D-671F-4BD6-929A-A16F90612281}"
+              SQLTask:SqlStatementSource="select coalesce(dateadd(day,1,max(fecha)),cast('20100101' as datetime)) fecha_ini from datosclimadiario where indicativo=?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::currentUltimaFecha" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::currentIdEstacion"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6D241E48-34AD-4C19-A471-28E22E1B86AB}"
+          DTS:From="Package\Foreach Loop Container\Obtiene ultima fecha con datos para la estacion"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Itera por estaciones" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A9A7B96E-84B8-4136-A50B-442363999949}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::HaltedBy_RequestExcess]==0"
+          DTS:From="Package\Foreach Loop Container\CheckPoint - Request Excess"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\Obtiene ultima fecha con datos para la estacion" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B2AE3DFD-3EE4-4480-9E45-5A4D55BD76BF}"
+          DTS:ObjectName="{B2AE3DFD-3EE4-4480-9E45-5A4D55BD76BF}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::currentIdEstacion" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Obtienes estaciones (BD)"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{96CE1AD9-8AC3-42C9-AF7A-64213BDF1477}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Obtienes estaciones (BD)"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C24FCE3D-671F-4BD6-929A-A16F90612281}"
+          SQLTask:SqlStatementSource="select id from dbo.estaciones"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::dsIdEstaciones" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{137F2F23-BD5E-4AB8-9537-C69714BCB568}"
+      DTS:From="Package\Obtienes estaciones (BD)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Foreach Loop Container\CheckPoint - Request Excess"
+          TopLeft="170,11" />
+        <NodeLayout
+          Size="252,42"
+          Id="Package\Foreach Loop Container\Itera por estaciones\Carga último año a partir de la fecha"
+          TopLeft="37.5,96.5" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Foreach Loop Container\Itera por estaciones\Genera un Id para la ejecución"
+          TopLeft="53,16.5" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Foreach Loop Container\Itera por estaciones\Obtiene info control"
+          TopLeft="76,243" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\Foreach Loop Container\Itera por estaciones\Obtiene ultima fecha con datos para la estacion"
+          TopLeft="17,169.5" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Itera por estaciones.PrecedenceConstraints[Constraint]"
+          TopLeft="166,138.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Itera por estaciones.PrecedenceConstraints[Constraint 1]"
+          TopLeft="164.25,58.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Itera por estaciones.PrecedenceConstraints[Constraint 2]"
+          TopLeft="165.25,211.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,31.5"
+              Start="0,0"
+              End="0,24">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="336,354"
+          Size="336,397"
+          Id="Package\Foreach Loop Container\Itera por estaciones"
+          TopLeft="124,143" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\Foreach Loop Container\Obtiene ultima fecha con datos para la estacion"
+          TopLeft="133,81" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="436,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-144,41"
+              Start="0,0"
+              End="-144,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-140,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-140,0"
+                    Point2="-144,0"
+                    Point3="-144,4" />
+                  <mssgle:LineSegment
+                    End="-144,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="280.75,53">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,2.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="609,596"
+          Size="609,639"
+          Id="Package\Foreach Loop Container"
+          TopLeft="540,247" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Obtienes estaciones (BD)"
+          TopLeft="640,108" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="739,150">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="105.5,97"
+              Start="0,0"
+              End="105.5,89.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.5"
+                    Point2="0,48.5"
+                    Point3="4,48.5" />
+                  <mssgle:LineSegment
+                    End="101.5,48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="101.5,48.5"
+                    Point2="105.5,48.5"
+                    Point3="105.5,52.5" />
+                  <mssgle:LineSegment
+                    End="105.5,89.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
